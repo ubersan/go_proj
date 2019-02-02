@@ -1,0 +1,10 @@
+#!/usr/bin/env ash
+
+USER_ID=`id -u`
+GROUP_ID=`id -g`
+
+echo "developer:x:${USER_ID}:${GROUP_ID}::/home/developer:/bin/zsh" >> /etc/passwd
+echo "developer:x:${GROUP_ID}:" >> /etc/group
+
+sudo chown ${USER_ID}:${GROUP_ID} /home/developer
+sudo chown ${USER_ID}:${GROUP_ID} /home/developer/.oh-my-zsh/cache

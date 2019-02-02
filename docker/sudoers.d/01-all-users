@@ -1,0 +1,3 @@
+#!/usr/bin/env ash
+
+ALL ALL=(ALL:ALL) NOPASSWD: ALL
