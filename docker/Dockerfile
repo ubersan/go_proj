@@ -1,14 +1,16 @@
-FROM golang:1.11.5-alpine3.8
+FROM golang:1.11.5-stretch
 
+ENV TERM xterm-256color
 ENV HOME /home/developer
 
-RUN apk update \
-  && apk add zsh \
-  && apk add inotify-tools \
-  && apk add sudo \
-  && apk add nano \
-  && apk add curl \
-  && apk add git
+RUN set -ex \
+  && apt-get update \
+  && apt-get -y install zsh \
+  && apt-get -y install inotify-tools \
+  && apt-get -y install sudo \
+  && apt-get -y install nano \
+  && apt-get -y install curl \
+  && apt-get -y install git
 
 RUN set -ex \
   && mkdir ${HOME} \
@@ -20,6 +22,10 @@ RUN set -ex \
   && ln -s /usr/share/localalias/localalias.zsh ${HOME}/.oh-my-zsh/custom/plugins/localalias/localalias.plugin.zsh
 
 RUN chmod 666 /etc/passwd /etc/group
+
+RUN wget -qO- https://binaries.cockroachdb.com/cockroach-v2.1.4.linux-amd64.tgz | tar  xvz
+
+RUN cp -i cockroach-v2.1.4.linux-amd64/cockroach /usr/local/bin
 
 COPY /home ${HOME}/
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env ash
+#!/usr/bin/env bash
 
 eval $(run-parts /etc/docker-entrypoint.d)
 
